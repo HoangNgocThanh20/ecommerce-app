@@ -96,3 +96,61 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## DESIGN DB
+
+# main entity version 1
+
+User
+Category
+Product
+ProductImage
+Cart
+CartItem
+Order
+OrderItem
+Review
+
+Analysis DB Relationship
+
+User      1-1  Cart
+User      1-N  Order
+User      1-N  Review
+
+Cart      1-N  CartItem
+
+Order     1-N  OrderItem
+
+Category  1-N  Product
+
+Product   1-N  ProductImage
+Product   1-N  Review
+Product   1-N  CartItem
+Product   1-N  OrderItem
+
+
+User
+ │
+ ├──── 1-1 ──── Cart
+ │                │
+ │                └──── 1-N ──── CartItem
+ │                                  │
+ │                                  └──── N-1 ──── Product
+ │
+ ├──── 1-N ──── Order
+ │                │
+ │                └──── 1-N ──── OrderItem
+ │                                  │
+ │                                  └──── N-1 ──── Product
+ │
+ └──── 1-N ──── Review
+                    │
+                    └──── N-1 ──── Product
+
+Category
+   │
+   └──── 1-N ──── Product
+                    │
+                    ├──── 1-N ──── ProductImage
+                    │
+                    └──── 1-N ──── Review
