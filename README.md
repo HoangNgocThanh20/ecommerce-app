@@ -154,3 +154,91 @@ Category
                     ├──── 1-N ──── ProductImage
                     │
                     └──── 1-N ──── Review
+
+
+User
+- id
+- name
+- passwordHash
+- email
+- avatar
+- address
+- phoneNumber
+- createdAt
+- updatedAt
+
+
+Category
+- id
+- name
+- createdAt
+- updatedAt
+
+
+Product
+- id
+- name
+- description
+- price
+- stock
+- quantitySold
+- categoryId
+- createdAt
+- updatedAt
+
+
+ProductImage
+- id
+- productId
+- url
+- isPrimary
+- sortOrder
+- createdAt
+
+
+Cart
+- id
+- userId
+- createdAt
+- updatedAt
+
+
+CartItem
+- id
+- cartId
+- productId
+- quantity
+- createdAt
+- updatedAt
+
+
+Order
+- id
+- userId
+- totalAmount
+- status
+- shippingAddress
+- phoneNumber
+- paymentMethod
+- paymentStatus
+- createdAt
+- updatedAt
+
+
+OrderItem
+- id
+- orderId
+- productId
+- unitPrice
+- quantity
+- subtotal
+
+
+Review
+- id
+- userId
+- productId
+- rating
+- comment
+- createdAt
+- updatedAt
