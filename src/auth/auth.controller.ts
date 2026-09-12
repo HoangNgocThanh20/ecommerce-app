@@ -7,8 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { SignInDto, SignUpDto } from 'src/dto/auth/auth.dto';
-import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -23,7 +23,7 @@ export class AuthController {
     return this.authService.signIn(signInDto);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
