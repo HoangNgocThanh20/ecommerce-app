@@ -7,7 +7,8 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
-// this is default use case when doesn't use jwt auth guard
+// UNUSE THIS FILE JUST REFERENCE, BECAUSE WE USE JWT AUTH GUARD INSTEAD OF THIS
+// THIS IS DEFAULT USE CASE WHEN DOESN'T USE JWT AUTH GUARD
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}

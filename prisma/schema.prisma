@@ -22,8 +22,8 @@ model User {
   address      String?
   phoneNumber  String?
   createdAt    DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  cart        Cart?
+  updatedAt    DateTime @updatedAt
+  cart         Cart?
   orders       Order[]
   reviews      Review[]
 }
@@ -34,7 +34,7 @@ model Cart {
   user      User       @relation(fields: [userId], references: [id])
   cartItems CartItem[]
   createdAt DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  updatedAt DateTime   @updatedAt
 }
 
 model CartItem {
@@ -45,16 +45,19 @@ model CartItem {
   cart      Cart     @relation(fields: [cartId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
+
   @@unique([cartId, productId])
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  products  Product[]
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
 }
 
 model Product {
@@ -71,7 +74,7 @@ model Product {
   cartItems     CartItem[]
   category      Category       @relation(fields: [categoryId], references: [id])
   createdAt     DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  updatedAt     DateTime       @updatedAt
 }
 
 model ProductImage {
@@ -80,7 +83,7 @@ model ProductImage {
   product   Product  @relation(fields: [productId], references: [id])
   url       String
   createdAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Review {
@@ -92,7 +95,7 @@ model Review {
   product   Product  @relation(fields: [productId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
@@ -101,7 +104,7 @@ model Order {
   totalAmount Decimal
   status      OrderStatus @default(PENDING)
   createdAt   DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  updatedAt   DateTime    @updatedAt
   user        User        @relation(fields: [userId], references: [id])
   orderItems  OrderItem[]
 }
@@ -123,5 +126,5 @@ model OrderItem {
   order     Order    @relation(fields: [orderId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
