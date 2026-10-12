@@ -12,6 +12,7 @@ import {
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import {
   CategoriesDto,
+  CreateCategoryDto,
   SearchCategoriesDto,
 } from 'src/dto/categories/categories.dto';
 import { CategoriesService } from './categories.service';
@@ -36,14 +37,16 @@ export class CategoriesController {
     return this.categoriesService.getCategoryById(slug);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':slug')
   updateCategory(
     @Param('slug') slug: string,
-    @Body() categoryDto: CategoriesDto,
+    @Body() categoryDto: CreateCategoryDto,
   ) {
     return this.categoriesService.updateCategory(slug, categoryDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':slug')
   deleteCategory(@Param('slug') slug: string) {
     return this.categoriesService.deleteCategory(slug);

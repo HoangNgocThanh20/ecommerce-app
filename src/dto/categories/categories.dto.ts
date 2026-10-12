@@ -1,12 +1,6 @@
-import { Type } from 'class-transformer';
-import {
-  IsIn,
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Min,
-} from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PaginationDto } from '../index.dto';
 
 export class CategoriesDto {
   @IsNotEmpty()
@@ -18,27 +12,9 @@ export class CategoriesDto {
   description?: string;
 }
 
-export class SearchCategoriesDto {
-  @Type(() => Number)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  page?: number;
+export class CreateCategoryDto extends PartialType(CategoriesDto) {}
 
-  @Type(() => Number)
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  limit?: number;
-
-  @IsOptional()
-  @IsString()
-  sortBy?: string;
-
-  @IsOptional()
-  @IsIn(['asc', 'desc'])
-  sortOrder?: 'asc' | 'desc';
-
+export class SearchCategoriesDto extends PaginationDto {
   @IsOptional()
   @IsString()
   search?: string;
